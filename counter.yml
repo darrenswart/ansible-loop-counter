@@ -1,0 +1,16 @@
+- name: Output counter
+  hosts: all
+  become: false
+  gather_facts: false
+
+  vars:
+    count_limit: 4
+
+  tasks:
+    - name: Output message
+      ansible.builtin.debug:
+        msg: "{{ ansible_loop.index }}"
+      loop: "{{ range(1, count_limit) | list }}"
+      loop_control:
+        pause: 1
+        extended: true
